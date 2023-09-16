@@ -1,7 +1,7 @@
 [
   {
     "intersection": 0,
-    "question": "Please, help my get my puppy back from the evil king. Here are some items that might help you on your quest. Choose wisely!",
+    "question": "A puppy has been kidnapped by the evil king and is trapped inside a castle, guarded by a dragon. Your venture will be tough. Here are some items that might help you on your quest. Choose wisely!",
     "options": [
       {
         "id": "firstItem",
@@ -32,8 +32,8 @@
             "icon": "🪢"
           }, 
           {
-            "id":"boat",
-            "text": "Inflatable boat",
+            "id":"canoe",
+            "text": "Inflatable canoe",
             "icon": "🛶"
           }
         ]
@@ -47,8 +47,8 @@
             "icon": "🛡️"
           }, 
           {
-            "id":"meat",
-            "text": "Piece of meat",
+            "id":"chicken",
+            "text": "Chicken leg",
             "icon": "🍗"
           }, 
           {
@@ -78,7 +78,7 @@
   },
   {
     "intersection": 1,
-    "question": "Which road will you take",
+    "question": "Shortly after you beging your quest reach a fork in the road. To the left: a scorching desert, straight ahead: a steep moutain and to the right: a raging river. Which road do you take?",
     "options": [
       {
         "id": "desert",
@@ -91,8 +91,8 @@
         "icon": "⛰️"
       },
       {
-        "id": "creek",
-        "text": "Livly creek",
+        "id": "river",
+        "text": "Raging river",
         "icon": "🌊"
       }
     ],
@@ -102,42 +102,42 @@
         "name": "desert",
         "goodItem": "water",
         "okItem": "umbrella",
-        "goodMessage": "Thankfully, the bottle of water 🥤 saves you from dehydration.🎖 You may proceed.",
-        "okMessage": "The umbrella ☂️ saved you from the scorching sun ☀️ but you are severly dehydrated and weakened. Lose 1 hp",
-        "failMessage": "The sun burns 🔥 your skin and you sweat every last drop of water 🥵. You die! ☠️"
+        "goodMessage": "After walking the desert for hours, you emerge on the other side, feeling good about bringing a bottle of water 🥤 as it saves you from dehydration. You press on.",
+        "okMessage": "The umbrella ☂️ saved you from the scorching sun but you emerge from the desert severly dehydrated and weakened. You lose one ❤️",
+        "failMessage": "The sun burns your skin and you sweat every last drop of water in your body. With your last efforts you think you probebly should have brought someting different with you into this scorching desert."
       },
       {
         "id": 2,
         "name": "mountain",
         "goodItem": "rope",
         "okItem": "helmet",
-        "goodMessage": "Using your rope 🪢 you mange to touch down on the ground softly. 🎖 You may proceed!",
-        "okMessage": "Halfway down you loose you footing, but thanks to your helmet eyou survived but very injured. Lose 1 hp.",
-        "failMessage": "You lose you footing and tumble down the mountain side, crushing every bone in your body. Why didn't you choose something else to help you on this dangerous mission? You die! ☠️"
+        "goodMessage": "After successfully climbing the steep mountain you use your rope 🪢 you mange to touch down on the ground softly. You push forward",
+        "okMessage": "Halfway down the steep mountain you loose you footing, sliding down the mountain wall. You scrape everu inch of your body but thanks to your helmet 🪖 you survive. You lose one ❤️",
+        "failMessage": "You lose you footing and tumble down the mountain side, crushing every bone in your body. Right before your last breath you think that you probably should have brought something else to this steep mountain."
       },
       {
         "id": 1,
-        "name": "creek",
-        "goodItem": "boat",
+        "name": "river",
+        "goodItem": "canoe",
         "okItem": "life-jacket",
-        "goodMessage": "The inflateble boat ⛵️ helped you to cruise peacefully down the creek 🌊. You may proceed!🎖",
-        "okMessage": "The life-jacket 🦺 helped you stay afloat on the dangerous water. You exit the creek alive but severely injured. 🤕 Lose 1 hp.",
-        "failMessage": "You attemt to swim along the creek 🌊 but its currents are too strong and you are pulled under water to a certain death. You drown! ☠️"
+        "goodMessage": "With your inflateble canoe 🛶 you raft down the river with great effort. Exiting to the shore you feel a litter tired but pumped up by adrenalin. You push forward",
+        "okMessage": "Swimming down the river you hit your head and body on rocks and floating debris. Thanks to the life-jacket 🦺 you stay afloat on the dangerous waters. You exit the river alive but severely injured. You lose one ❤️",
+        "failMessage": "You attemt to swim along the river but its currents are too strong and you are pulled under water to a certain death. As your last breath is bubblig out through your nose you think you probably should have brought someting different to this ragig river."
       }
     ]
   },
   {
     "intersection": 2,
-    "question": "You can see the puppy now but its guarded by a huge dragon 🐶 🐲. Are you brave enough to continue?",
+    "question": "You see the castle in the the distance. As you walk closer, doubt seeps into your mind. You begin to question whether you have what it take for this dire quest. You stop and ponder: Do I continue? Do turn back?",
     "options": [
       {
         "id": "continue",
-        "text": "Bring it on!",
+        "text": "Continue",
         "icon": ""
       },
       {
         "id": "resign",
-        "text": "No, I'm too scared",
+        "text": "Resign",
         "icon": ""
       }
     ],
@@ -147,7 +147,7 @@
         "name": "continue",
         "goodItem": "",
         "okItem": "",
-        "goodMessage": "I knew I could count on you!",
+        "goodMessage": "Pleased with your decision you press on, thinking you can overcome anything.",
         "okMessage": "",
         "failMessage": ""
       },
@@ -158,13 +158,13 @@
         "okItem": "",
         "goodMessage": "",
         "okMessage": "",
-        "failMessage": "Coward!😡 Come back when you are ready!"
+        "failMessage": "What? You resign? This quest is about saving an adorable puppy and you resign? To hell with you 'adventurer'!"
       }
     ]
   },
   {
     "intersection": 3,
-    "question": "How will you try to get past the dragon 🐲? Perhaps there is someting in you backpack that can aid you.",
+    "question": "Closing in on the caslte you try to come up with a plan to get past the dragon. You figure you have three options: try and soothe it, attack it or sneek past it. What do you decide is the best course of action?",
     "options": [
       {
         "id": "soothe",
@@ -187,34 +187,34 @@
         "id": 1,
         "name": "soothe",
         "goodItem": "guitar",
-        "okItem": "meat",
-        "goodMessage": "The music you play on your guitar 🎸 makes the dragon fall asleep 💤. You may proceed.",
-        "okMessage": "You hold out the piece of meat 🍖 to the dragon 🐲. It makes it relaxed and happy but it also bites your hand off 🍽. You loose alot of blood 🩸. Lose 1 hp",
-        "failMessage": "Your attemt fails and the dragon 🐲 eats you alive. Why didn't you choose something else to help you on this dangerous mission? You die. ☠️"
+        "okItem": "chicken",
+        "goodMessage": "You puck your favourite lullaby on the strings of your guitar 🎸. With a fiery yawn the dragon curls up and is soon sound asleep. You gently push the doors open and enter the castle.",
+        "okMessage": "You hold out the chicken leg 🍗 to the dragon. Swiftly it snatches it from your grip and accidentally also takes off a few of you fingers. The dragon is pleased with its' meal. You enter the castle, feeling dizzy from the blood loss. You lose one ❤️",
+        "failMessage": "Thinking of how your mother used to comfort you as a baby, you walk up to the dragon to give it a warm hug. Your attemt fails and the dragon eats you alive. As you see the dragons jaws close from the inside you think you probebly should have brought someting different on this journey."
       },
       {
         "id": 2,
         "name": "attack",
         "goodItem": "sword",
         "okItem": "shield",
-        "goodMessage": "You pull out your sword 🗡 and thrust it in to the dragons 🐲 heart, killing it. You may proceed.",
-        "okMessage": "Using you shield 🛡 you block most of the dragons 🐲 attack but you still get injured. 🤕 Your body is severly bruised. Lose 1 hp.",
-        "failMessage": "Your attemt fails and the dragon 🐲 eats you alive. Why didn't you choose something else to help you on this dangerous mission? You die! ☠️"
+        "goodMessage": "You pull out your sword 🗡 and thrust it in to the dragons heart, killing it in an instant. Feeling triumphant and without empathy for the dead creature you burst open the doors and enter the castle.",
+        "okMessage": "You rush toward the dragon straight on holding up your shield 🛡, you block most of the dragons firey breath and knock it uncontious with a bash. You limp through the caslte doors with your legs severely burned. You lose one ❤️.",
+        "failMessage": "You flail your arms around you, trying och knock out the dragon. Your attemt fails and the dragon eats you alive. As you see the dragons jaws close from the inside you think you probebly should have brought someting different on this journey."
       },
       {
         "id": 3,
         "name": "sneak",
         "goodItem": "cloak",
         "okItem": "moccasins",
-        "goodMessage": "Using your invisibility cloak 🧥 you sneak safely past the dragon 🐲. You may proceed.",
-        "okMessage": "Thanks to your moccasin the dragon 🐲 can't hear you sneak past it 🤫. Unfortunately it sees you and severly burns you 🔥. Lose 1 hp.",
-        "failMessage": "Your attemt fails and the dragon 🐲  eats you alive. Why didn't you choose something useful to helt you on this dangerous mission? You die! ☠️"
+        "goodMessage": "Inspired by Harry Potter, you use your invisibility cloak 🧥 to safely sneak past the dragon. Unnoticed, you slip into the castle.",
+        "okMessage": "With the moccasins on your feet you tiptoe towards the entrance without a sound. Unfortunately the dragon has great eye sight and sends out a firey breath towards you. You dash into the castle and realize your hair is on fire. You pat it out with your hands but your head are burned beyond recognition. You lose one ❤️",
+        "failMessage": "You do your best to crouch down but the dragon can both see and hear you. I walks up to you and eats you alive. As you see the dragons jaws close from the inside you think you probebly should have brought someting different on this journey."
       }
     ]
   },
   {
     "intersection": 4,
-    "question": "The adorable puppy 🐶 is whithin reach but you also see a marvelous treasure 👑. You can only carry one of them. What will you bring?",
+    "question": "You see the adorable puppy 🐶 lying relaxed on its side, bound by its feet, and you realize you are going to have to carry it. The puppy is huge, turns out it's a Great Dane. Beside the pubby you see a marvelous treasure 🏆. You only have strenght enought to carry one of them. What will you take with you?",
     "options": [
       {
         "id": "puppy",
@@ -233,7 +233,7 @@
         "name": "puppy",
         "goodItem": "",
         "okItem": "",
-        "goodMessage": "Thank you adventurer! Thank you!",
+        "goodMessage": "You pick the puppy up and walk to wards the back exit. The puppy happliy greets you, licking your face.",
         "okMessage": "",
         "failMessage": ""
       },
@@ -244,7 +244,7 @@
         "okItem": "",
         "goodMessage": "",
         "okMessage": "",
-        "failMessage": "How could you chose the treasure over my precious baby?! You are a horrible, greedy person ${hero.name}!"
+        "failMessage": "The treasure? Really! You are a horrible, greedy person! Game over for you 'adventurer'!"
       }
     ]
   }

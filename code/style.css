@@ -3,13 +3,19 @@
   margin: 0;
   padding: 0;
 }
-
+:root {
+  --light-bg-opacity: rgba(229, 233, 255, 0.1);
+  --light-bg: #e5e9ff;
+  --dark: #040D12;
+  --dark-green: #183D3D;
+  --green: #5C8374;
+  --light-green: #93B1A6;
+}
 body {
   font-family: 'Montserrat', sans-serif;
-  background: #ffd89b;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #19547b, #ffd89b);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #19547b, #ffd89b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  min-height: 100vh;
+  background: var(--dark-green);
+  height: 100vh;
+  padding: 1rem;
 }
 @media (min-width: 900px) {
   h1 {
@@ -20,64 +26,137 @@ body {
     line-height: 34px;
   }
   .bot-msg img,
-.user-msg img {
-  width: 60px;
-  height: 60px;
+  .user-msg img {
+    width: 60px;
+    height: 60px;
+  }
+
+  button:hover {
+    opacity: 0.9;
+    transition: all 0.2s ease;
+  }
+
 }
 
-button:hover {
-  opacity: 0.9;
-  transition: all 0.2s ease;
+h1, h2 {
+  color: var(--light-green);  
 }
 
+input, p, select, .bubble {
+  color: var(--dark-green);
 }
+
 h1 {
-  font-size: 1.2rem;
+  line-height: 1;
+  font-size: 1.5rem;
   font-weight: bold;
-  line-height: 34px;
-  color: #155174;
-  text-align: center;
 }
 
 h2 {
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 34px;
-  color: #0B486B;
-  text-align: center;
-  margin-bottom: 36px;
+  line-height: 0.5;
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 p {
   font-size: 1rem;
-  font-weight: 400;
   line-height: 1.2rem;
   margin: 0;
 }
 
-input {
-  border: none;
-  border-radius: 0.25rem;
-  background: #e5e9ff;
-  color: #3B8686;
-  padding: 1rem;
+a {
+  color: #fff;
+  text-decoration: none;
 }
 
-input[type=text] {
-  flex: 1;
+/* ------------------------ HEADER ------------------------ */
+.header {
+  height: 10vh;
+  margin-bottom: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-select {
-  min-width: 7rem;
-  width: 33%;
+.heading-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
 }
 
+.logo-heading-container {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: flex-end;  
+}
+
+.logo {
+  height: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.player-interface {
+  background: var(--light-bg-opacity);
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 8px;
+}
+
+.player-interface p {
+  color: var(--light-green);
+}
+
+.heart {
+  width: 2rem;
+}
+
+.inventory {
+  border: 1px solid var(--light-green);
+  height: 3rem;
+  width: 6rem;
+  position: relative;
+  top: 0.25rem;
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.handle {
+  width: 2rem;
+  height: 0.7rem;
+  border: 1px solid var(--light-green);
+  border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: -0.7rem;
+  left: calc((100% - 2rem)/ 2)
+}
+
+.inventory-item {
+  background: #dcdff1;
+  font-size: 1.8rem;
+  width: 2.5rem;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+}
+
+.item-consumed {
+  opacity: 0.3;
+}
+
+/* ------------------------ MAIN / CHAT ------------------------ */
 main {
   margin: 0 auto;
   width: 100%;
   max-width: 700px;
-  height: 80vh;
-  padding: 20px 24px;
+  height: 65vh;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -95,17 +174,6 @@ main {
 .message {
   display: flex;
   margin: 0.5rem 0;
-
-}
-.bot-msg {
-  margin-right: auto;
-
-}
-
-.user-msg {
-
-  flex-direction: row-reverse;
-  margin-left: auto;
 }
 
 .bot-msg img,
@@ -114,10 +182,17 @@ main {
   height: 2rem;
 }
 
+.bot-msg {
+  margin-right: auto;
+}
+
+.user-msg {
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
 .bubble {
-  background: #e5e9ff;
-  color: #3B8686;
-  max-width: 80%;
+  background: var(--light-bg);
   padding: 0.8rem;
 }
 
@@ -131,64 +206,131 @@ main {
   margin-right: 0.5rem;
 }
 
+/* ------------------------ INPUT-WRAPPER ------------------------ */
 .input-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
-  width: 100%;
-  padding: 0 0.5rem;
+  margin-top: 1rem;
+  position: relative;
+  gap: 0.5rem;
+  top: 2rem
 }
 
 .input-wrapper form {
-  
   display: flex;
   gap: 0.5rem;
-  justify-content: space-around;
-  
+}
+
+/* ------------------------ INPUTS / BUTTONS ------------------------ */
+select, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+input {
+  border: none;
+  border-radius: 0.25rem;
+  background: var(--light-bg);
+  padding: 1rem;
+}
+
+input[type=text] {
+  flex: 1;
+}
+
+select {
+  min-width: 7rem;
+  width: 33%;
+  padding: 0 0.2rem;
+  background: var(--light-bg);
+  border-radius: 4px;
 }
 
 button {
-  background-color: #0B486B;
+  background: var(--dark-green);
   color: white;
-  border: none;
+  border: 1px solid var(--light-green);
   border-radius: 4px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 6rem;
 }
 
-
+.retry-btn {
+  background: #cf0a0a;
+  border: none;
+}
+ 
+/* ------------------------ SPECIAL GAME CONDITION SCREENS ------------------------ */
 .gameover-wrapper {
-  background-color: #000;
+  background: #000;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 90%;
   flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  gap: 5rem;
 }
 
-.retry-btn {
-  background-color: #ff0000;
+h1.game-over {
+  font-size: 2rem;
 }
 
-.replay-btn {
-
+.end-content-header {
+  padding: 1rem 0 0;
+  text-align: center;
+}
+.end-content-header h2 {
+  margin-top: 0.5rem;
+}
+.end-content-header p {
+  margin-top: 1rem;
+  color: var(--light-bg);
 }
 
-.giphy-embed {
-  height:50vh;
-  border: 0;
-  margin: -3rem 0;
-  }
+.animation-container {
+  margin: 2rem 0;
+}
 
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
- 
-.price-button {
-  font-size: 50px;
+.end-screen-container {
+  gap: 1rem;
+}
+
+.end-screen-container p {
+  color: var(--light-green);
+}
+.end-screen-container p {
+  color: var(--light-green);
+}
+.end-screen-container button {
+  background: var(--light-green);
+  color: var(--dark);
+  font-size: 1rem;
+  border-color: var(--light-bg);
+}
+
+
+
+.attribution {
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin-top: 1.5rem;
+}
+
+/* ------------------------ REUSABLE STYLING CLASSES ------------------------ */
+.flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-column-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
