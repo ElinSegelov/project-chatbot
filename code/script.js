@@ -6,6 +6,11 @@ const inputWrapper = document.querySelector(".input-wrapper");
 const entireScreen = document.querySelector("#body-id");
 const submitButton = document.querySelector(".send-btn");
 const inputField = document.querySelector("#name-input");
+const inventory = document.querySelector(".inventory");
+const inventoryItems = document.querySelectorAll(".inventory-item");
+const heart = document.querySelectorAll(".heart");
+const hpContainer = document.querySelector(".hp-container");
+const nameSpan = document.querySelector("#name-span");
 
 // Global variables
 let pathChoices;
@@ -36,7 +41,6 @@ const generateChatHTML = (message, senderType, senderIcon) => `
 
 // Generating messages
 const showMessage = (message, sender) => {
-
   const senderType = sender === 'user' ? 'user' : 'bot';
   const senderIcon = sender === 'user' ? 'user' : 'bot';
   chat.innerHTML += generateChatHTML(message, senderType, senderIcon);
@@ -45,8 +49,35 @@ const showMessage = (message, sender) => {
   chat.scrollTop = chat.scrollHeight;
 };
 
+const updateHeroPanel = (usedItem) => {
+  let itemsInInventory;
+  
+  if (hero.healthPoints < 2) {
+    const consumedHp = document.getElementById(`hp${(hero.healthPoints) + 1}`);
+    consumedHp.classList.add('item-consumed')
+  }
+  
+  if (usedItem) {
+    const consumedItem = document.getElementById(usedItem);
+    if (consumedItem) {
+      consumedItem.classList.add('item-consumed');
+    }
+  } else {
+    itemsInInventory = hero.inventory.map((item) => {  
+      return (
+        `<span
+        id=${item.id}
+        class="inventory-item first-item">
+        ${item.icon}
+        </span>`
+        )
+    })
+    inventory.insertAdjacentHTML("beforeend", itemsInInventory.join(''))
+  }
+}
+
 const greeting = () => {
-  showMessage("Hi friend 👋, what is your name?", 'bot');
+  showMessage("Greatings, adventurer! I am your narrator. What is your name?", 'bot');
 }
 
 setTimeout(() => greeting(), 1000);
@@ -54,9 +85,14 @@ setTimeout(() => greeting(), 1000);
 replyForm.addEventListener("submit", (event) => {
   event.preventDefault();
   hero.name = inputField.value; // Sets value to heros name 
-  showMessage(`Hello 👋, my name is ${hero.name}`, "user"); 
+  showMessage(`Hi there, I'm ${hero.name} and I'm always up for a quest!`, "user"); 
+
+  const newSpan = document.createElement("span");
+  newSpan.innerHTML = hero.name;
   inputWrapper.innerHTML = "";
-  setTimeout(() => displayChoices(0), 1200);
+  nameSpan.insertAdjacentElement("beforeend", newSpan);
+
+  setTimeout(() => displayChoices(0), 2000);
 })
 
 //! ------------------------- displayChoices ---------------------------
@@ -97,13 +133,18 @@ const displayChoices = (currentIntersection) => {
     itemForm.addEventListener("submit", (event) => {
       event.preventDefault();
       // the value of the selected option in respective list is assign to variables and added to heros inventory.
-      const firstItem = itemList1.options[itemList1.selectedIndex].value;
-      const secondItem = itemList2.options[itemList2.selectedIndex].value;
+      const firstItem = pathChoices[currentIntersection].options[0].items.find((item) => item.id === itemList1.options[itemList1.selectedIndex].value);
+      const secondItem = pathChoices[currentIntersection].options[1].items.find((item) => item.id === itemList2.options[itemList2.selectedIndex].value);
+      console.log(firstItem)
+      console.log(secondItem)
+      //const secondItem = itemList2.options[itemList2.selectedIndex].value;
       hero.inventory.push(firstItem, secondItem)
+      
+      updateHeroPanel();
 
       inputWrapper.innerHTML = ``;
 
-      showMessage (`I choose the ${hero.inventory[0]} and the ${hero.inventory[1]}`, 'user');
+      showMessage (`I choose the ${hero.inventory[0].text} and the ${hero.inventory[1].text}`, 'user');
       setTimeout(() => displayChoices(currentIntersection +1), 1200);
       intersectionCounter++;
     }) 
@@ -114,7 +155,7 @@ const displayChoices = (currentIntersection) => {
       `)
     })
     inputWrapper.innerHTML = `
-      ${allOptions}
+      ${allOptions.join('')}
     `;
   }
   
@@ -163,21 +204,23 @@ const pathChoice = (id) => {
     setTimeout(() => gameOver(), 2000)
   } else {
     //Checking for items in inventory
-    if (hero.inventory.includes(currentPath.goodItem)) {
+    if (hero.inventory.some((item) => item.id === currentPath.goodItem)) {
       setTimeout( () => {
         showMessage(currentPath.goodMessage,`bot`); 
-        setTimeout( () => {showMessage(`Wohoo! 🥳`,`user`)}, 3500);  
+        updateHeroPanel(currentPath.goodItem);
+        setTimeout( () => {showMessage(`I'm feeling good about this!`,`user`)}, 3500);  
       }, 1800);
-    } else if (hero.inventory.includes(currentPath.okItem)) {
+    } else if (hero.inventory.some((item) => item.id === currentPath.okItem)) {
       setTimeout( () => { 
         hero.healthPoints -= 1;
         showMessage(currentPath.okMessage,`bot`); 
+        updateHeroPanel(currentPath.okItem)
         console.log('hp vid ok item', hero.healthPoints)
         if (hero.healthPoints === 0) {
           setTimeout( () => {deathBy0Hp()}, 3000);
         } else {
           //TODO replace with showing a heart disapperaing from hp bar
-          setTimeout( () => {showMessage(`Oh no! ❤️‍🩹`,`user`)}, 3500);
+          setTimeout( () => {showMessage(`Oh... it hurts!`,`user`)}, 3500);
         }
       }, 1800);
     } else {
@@ -186,7 +229,7 @@ const pathChoice = (id) => {
       setTimeout(() => deathBy0Hp(), 3000);
     }
   }
-
+  
   if (hero.healthPoints > 0 && id !== 'puppy' || id !== 'treasure') {
     setTimeout(() => displayChoices(intersectionCounter), 8000)
   } else if (hero.healthPoints === 0) {
@@ -199,11 +242,11 @@ const pathChoice = (id) => {
 
 const finalScene = () => {
   setTimeout(showMessage
-    (`Great job. The items you brought 🎒 really helped you on this mission.
-    I knew you could do it!✌️ You and the puppy 🦸‍♀️🐶 get in to a waiting helicopter 🚁 and fly away to safety...`,
-    'bot'), 3000
+    (`As you exit throught the castles back doors and thinking of what you have endured, you knew the ${hero.inventory[0].text} and ${hero.inventory[1].text} would come in handy.
+    You see a helicopter with its engine running idly. You get in to the helicopter and fly your self and the puppy to safety...`,
+    'bot'), 2000
   )
-  setTimeout(endScreen, 8000)
+  setTimeout(endScreen, 10000)
 }
 
 const deathBy0Hp = () => {
@@ -215,18 +258,35 @@ const deathBy0Hp = () => {
 
 const endScreen = () => {
   entireScreen.innerHTML=`
-  <div class="end-content-wrapper">
-    <h1>🏆 Victory! 🏆<h1>
-    <p>Well done ${hero.name}! You got past the dragon and rescued the puppy.</p>
-    <p>Now you and the puppy can enjoy a well deserved rest! Mission accomplished!</p>
-    <div>
-      <iframe src="https://giphy.com/embed/LRZZJtvKUb6pBASWSH" class="giphy-embed" allowFullScreen></iframe>
-      <p><a href="https://giphy.com/gifs/hawaii-maui-kauai-LRZZJtvKUb6pBASWSH">via GIPHY</a></p>
-    </div>
-    <button class="replay-btn">Play again</button>
-    <p> This interactive story was made by Elin Segelöv and Saralie Bognandi.</p>
-    </div>
-    `
+    <div class="end-content-wrapper">
+      <div class="end-content-header">
+        <h1>The Lost Bark:</h1>
+        <h2>Quest for a lost pup<h2>
+        <p>Mission accomplished!<p>
+      </div>  
+      <div class="flex-center-center animation-container">
+        <lottie-player
+        src="https://lottie.host/21b8bbbc-edc9-4faf-8d69-6e41343a4b7f/dWMdlHrQIt.json"
+        background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay>
+        </lottie-player>
+      </div>
+      
+      <div class="flex-column-center-center end-screen-container">
+        <p>Well done ${hero.name}! You put your ${hero.inventory[0].text} and ${hero.inventory[1].text}
+          to good use and got past the dragon.</p>
+        <p>You turn on the autopilot of the helicopter, untie the puppys feet and get some well deserved puppy love!</p>
+        
+        <button class="replay-btn">Play again</button>
+        <p class="attribution">
+          <a href="https://icons8.com/icon/JgMkyDIhH9gy/dog">Puppy</a>,
+          <a href="https://icons8.com/icon/4DpNVfpKdNK1/heart">Heart</a>,
+          <a href="https://icons8.com/icon/ZWlC2P8mA86Z/bot">Bot</a> and
+          <a href="https://icons8.com/icon/dXwOpjDM5Gw4/adventurer">Adventurer</a>
+          icons by <a href="https://icons8.com">Icons8</a>
+        </p>
+      </div>
+    </div> 
+  `
   const retryButton = document.querySelector(".replay-btn");
   retryButton.addEventListener("click", () => {
     location.reload();
