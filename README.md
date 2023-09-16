@@ -12,4 +12,4 @@ The code is very linear, flowing from top to bottom and quite repetative. We wou
 
 ## View it live
 
-https://delightful-praline-eda5a7.netlify.app/
+https://the-lost-bark.netlify.app/
